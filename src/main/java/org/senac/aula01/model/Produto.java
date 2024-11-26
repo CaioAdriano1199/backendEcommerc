@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+//isso é um comentario
 @Entity
 public class Produto {
     @Id
@@ -21,8 +21,6 @@ public class Produto {
     private String imagem;
 
     private double preco;
-
-    
 
     public int getID() {
         return ID;
