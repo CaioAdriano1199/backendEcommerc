@@ -2,6 +2,7 @@ package org.senac.aula01.controller;
 
 import java.util.List;
 
+
 import org.senac.aula01.model.Produto;
 import org.senac.aula01.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,12 @@ public class ProdutoController {
     private ProdutoRepository repository;
  
     @GetMapping
-    public List<Produto> get(@RequestParam(required = false, defaultValue = "nome")String order){      
-        Sort s = Sort.by(order);  
-        return repository.findAll(s);
+    public List<Produto> get(@RequestParam(required = false, defaultValue = "nome")String orderBy, @RequestParam(required = false, defaultValue = "asc")String direction){      
+        Sort.Direction sortDirection = direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC: Sort.Direction.ASC;  
+
+        Sort sort = Sort.by(sortDirection, orderBy);
+
+        return repository.findAll(sort);
     }
  
  
