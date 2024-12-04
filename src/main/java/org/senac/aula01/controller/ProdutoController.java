@@ -22,12 +22,15 @@ public class ProdutoController {
     private ProdutoRepository repository;
  
     @GetMapping
-    public List<Produto> get(@RequestParam(required = false, defaultValue = "nome")String orderBy, @RequestParam(required = false, defaultValue = "asc")String direction){      
+    public List<Produto> get(@RequestParam(required = false, defaultValue = "nome")String orderBy, @RequestParam(required = false, defaultValue = "asc")String direction,
+      @RequestParam(required = false)String filter){  
+
         Sort.Direction sortDirection = direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC: Sort.Direction.ASC;  
-
         Sort sort = Sort.by(sortDirection, orderBy);
-
+        if(filter == null){
         return repository.findAll(sort);
+      }
+      return repository.findByNomeContains(filter, sort);
     }
  
  
